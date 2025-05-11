@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-ALLOWED_IPS = ["191.241.132.114", "127.0.0.1"]
+#ALLOWED_IPS = ["191.241.132.114", "127.0.0.1"]
 
 @app.before_request
 def restrict_by_ip():
