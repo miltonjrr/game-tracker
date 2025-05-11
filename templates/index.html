@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Game Library</h1>
+        <a href="/add" class="btn">Add a Game</a>
+        
+        <ul class="game-list">
+            {% for game in games %}
+                <li class="game-item">
+                    <div class="game-info">
+                        <strong>{{ game.title }}</strong> — <span class="status-{{ game.status|lower|replace(' ', '-') }}">{{ game.status }}</span>
+                    </div>
+                    <div class="game-actions">
+                        <form action="/update/{{ game.id }}" method="POST">
+                            <select name="status" class="status-select">
+                                <option value="Not Started" {% if game.status == 'Not Started' %}selected{% endif %}>Not Started</option>
+                                <option value="In Progress" {% if game.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                                <option value="Completed" {% if game.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            </select>
+                            <button type="submit" class="btn update-btn">Update</button>
+                        </form>
+                        <form action="/delete/{{ game.id }}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn delete-btn">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}    
+        </ul>
+    </div>
+</body>
+</html>
